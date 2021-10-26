@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>URL Shortener</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A simple URL Shortener for private use.">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="title">URL Shortener</div>
+        <form method="POST">
+            <input type="text" name="url" placeholder="Long URL" value="{{ url }}" autocomplete="off" required autofocus>
+            <input type="text" name="url_id" placeholder="Short URL (optional)" autocomplete="off">
+            <input type="submit" value="Shorten!">
+        </form>
+        <div class="success">
+            {% if success == "1" %}
+            Successfully shortened URL! Your URL is <a href="http://short.jakubwilk.xyz/{{ url_id | urlencode }}" target="_blank">short.jakubwilk.xyz/{{ url_id }}</a>
+            {% elif success == "-1" %}
+            That short URL already exists!
+            {% endif %}
+        </div>
+        <style>
+            body {
+                margin: 0;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background-color: #9b59b6;
+            }
+
+            div, input {
+                font-family: "Montserrat", sans-serif;
+            }
+
+            .title {
+                height: 4rem;
+                font-size: 2.8rem;
+                margin-bottom: 3rem;
+                font-weight: bold;
+                color: white;
+                text-shadow: 0.2rem 0.2rem 0.3rem rgba(0,0,0,0.4);
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            input {
+                height: 2.5rem;
+                font-size: 1rem;
+                margin: 0.5rem;
+                color: #2c3e50;
+                outline: none;
+                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2),0 4px 6px -2px rgba(0,0,0,0.1);
+                border: none;
+                border-radius: 0.5rem;
+            }
+
+            input[type=text] {
+                min-width: 40vw;
+                padding-left: 0.5rem;
+            }
+
+            input[type=submit] {
+                background-color: white;
+                width: 8rem;
+            }
+
+            input[type=submit]:hover {
+                cursor: pointer;
+                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.4),0 4px 6px -2px rgba(0,0,0,0.2);
+            }
+
+            input::placeholder {
+                color: #95a5a6;
+            }
+
+            .success {
+                height: 2.5rem;
+                font-size: 1.2rem;
+                min-width: 1rem;
+                color: white;
+            }
+
+            a:link {
+                color: #f1c40f;
+            }
+
+            a:visited {
+                color: #e67e22;
+            }
+
+            a:hover {
+                color: #f39c12;
+            }
+
+            a:active {
+                color: #e67e22;
+            }
+        </style>
+    </body>
+</html>
