@@ -120,6 +120,7 @@ async fn main() -> std::io::Result<()> {
     tera.add_raw_template("404.html", include_str!("../templates/404.html")).expect("Failed to compile 404.html");
 
     let address = dotenv::var("ADDRESS").expect("Failed to load ADDRESS");
+    let hostname = dotenv::var("HOSTNAME").expect("Failed to load HOSTNAME")
 
     println!("Starting Actix App on {}", address);
 
@@ -138,6 +139,7 @@ async fn main() -> std::io::Result<()> {
                     .route(web::post().to(index_post))
             )
     })
+    .server_hostname(hostname)
     .bind(address)?
     .run()
     .await
